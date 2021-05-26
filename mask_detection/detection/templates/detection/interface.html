@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+
+	body{
+		background-color: #638CB8;
+	}
+
+	input{
+		/*width: 100%;*/
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+	.submit{
+		background-color: #6BA3E8;
+	}
+
+	.center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+
+	.item-row{
+		background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 16px;
+		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+	}
+
+	.btn-danger{
+		background-color: #ffae19;
+		border-color: #e59400;
+	}
+
+</style>
+
+
+<div class="center-column">
+    <h2><center>😷 Correct Face Mask Detection</center></h2>
+
+    <div class="item-row">
+        <center>Final project for CPEN 291 by Team Styracosaurus🦖</center>
+        <br>
+        Use of face masks has become an important part of our life due to COVID-19. 
+        Accordingly, there are <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks">guidelines outlined by WHO</a> 
+        on how to wear a mask correctly.<br>
+        <br>
+        The goal of this project is to correctly detect masked faces, covering nose, mouth and chin from images using 
+        <a href="https://pytorch.org/hub/pytorch_vision_resnet/">PyTorch's ResNet18</a> Deep Neural Network architecture.<br>
+        <br>
+        Currently our model has achieved a train accuracy of 98.14% and a test accuracy of 96.20%.<br>
+    </div>
+
+    {% block content %}
+        Please upload an image <b>(.jpg, .jpeg, or .png)</b> of a person wearing a mask:<br>
+        <form method="POST" enctype="multipart/form-data" action="predictImage">
+            {% csrf_token %}
+            <input class="btn btn-outline-info" type="file" name="filePath">
+            <input class="btn btn-success" type="submit" value="Upload & Analyze!">
+        </form>
+    {% endblock %}
+
+    <!-- add more responsive design
+        e.g. initial placeholder image
+        if statements to clear image-->
+    <center>
+        {% if pred != 'Correct' and pred != 'Incorrect' %}
+            <!-- <img src="placeholder.PNG" alt='placeholder'> -->
+        {% else %}
+            <img src={{filePathName}} alt='imagename'>
+        {% endif %}
+    </center>
+    
+    <br>
+
+    <h3>Prediction</h3>
+    {% if pred == 'Correct' %}
+        <div class="alert alert-success" role="alert">
+            <h4>{{ pred }}✔️</h4>
+            Tips on how to wear a mask correctly:
+            <ul>
+                <li>Wear the mask over your nose and mouth to help prevent getting and spreading COVID-19.</li>
+                <li>Don't put the mask around your neck or up on your forehead.</li>
+            </ul>
+        </div>
+    {% elif pred == 'Incorrect' %}
+        <div class="alert alert-danger" role="alert">
+            <h4>{{ pred }}❌</h4>
+            Tips on how to wear a mask correctly:
+            <ul>
+                <li>Wear the mask over your nose and mouth to help prevent getting and spreading COVID-19.</li>
+                <li>Don't put the mask around your chin, neck, or up on your forehead.</li>
+            </ul>
+        </div>
+    {% else %}
+        <div class="alert alert-primary" role="alert">
+            Please upload an image first!
+        </div>
+    {% endif %}
+    <!-- if want to display file name: {{filePathName}} -->
+
+</div>
