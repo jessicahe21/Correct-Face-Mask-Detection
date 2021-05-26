@@ -1,7 +1,9 @@
 # Correct Face Mask Detection
 
-#### [Try it out](http://correct-mask-detection.herokuapp.com/) yourself! 
-
+### [>> Try it out here! <<](http://correct-mask-detection.herokuapp.com/)
+- *Note: Initial access to the website may load a little slow. This is due to the project's slug size hitting the soft cap for the free version of Heroku. Please be patient!*
+- [Google Slides](https://drive.google.com/file/d/1HEamCg3VZ0RS-TnzHeoRO9UohaJuFGVG/view?usp=sharing)
+- [Final Project Report](https://docs.google.com/document/d/1Ixv-e-XWAnP51uduVc8fZtFw7X9kA9fz5kw8y_691lM/edit?usp=sharing)
 
 Final project for CPEN 291 by Team Styracosaurus🦖
 
